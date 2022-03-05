@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ArtEvent } from '../interfaces/art-event';
 import { Login } from '../interfaces/login';
+import { Signup } from '../interfaces/signup';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,23 @@ export class BackendService {
 
       localStorage.setItem('currentUser', JSON.stringify(user))
       return user;
-      
+
     }
     ))
   }
 
   //----- Signup
+  
+    public signup(user: Signup): Observable<any> {
+
+      return this.http.post<any>('http://localhost:3000/user/signup', user)
+      .pipe(map(user => {
+        localStorage.setItem('currentUser', JSON.stringify(user))
+  
+        return user;
+      }
+      ))
+    }
 
   //----- GetEvents
   getEvents(): Observable<ArtEvent[]> {
