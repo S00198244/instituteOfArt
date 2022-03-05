@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-8" *ngFor="let event of artEvents">
+
+    <div class="row hvr-grow-shadow" style="background-color: white; margin-top: 4em; ">
+
+        <div class="row">
+          <div class="col-md-6" style="background-color:black;">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-6">
+            <!-- <div class="card"> -->
+            <div class="card-body">
+              <h5 class="card-title">{{event.title}}</h5>
+              <p class="card-text">{{event.summary}}</p>
+              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+              <button type="button" class="mybtn blackbtn " style="margin: 1em;">Details</button>
+              <button type="button" class="mybtn">Book ticket</button>
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+
+      <!-- <div>
+
+       <button type="button btn-primary" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <div class="dropdown-menu">
+          <a class="dropdown-item" (click)="editArtEvent()">Edit</a>
+          <a class="dropdown-item" style="color: tomato;" (click)="deleteCard()">Delete</a>
+        </div>
+      </div> -->
+
+      </div>
+    </div>
+</div>

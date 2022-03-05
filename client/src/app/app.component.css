@@ -1,0 +1,40 @@
+.banner-container{
+    height: 10vh;
+    display: flex;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;                                   
+}
+
+.banner{
+    display: flex;
+    align-items: center;
+    padding-left: 2em;
+    width: 100vw;
+}
+
+.logo-text{
+    color: white;
+    text-decoration: none;
+}
+
+.body{
+    background-color: black;
+    height: 80vh;
+}
+
+.container{
+    background-color: white;
+}
+
+.inside-container{
+    background-color: black;
+    padding: 2em;
+}
+
+.footer{
+    height: 10vh;
+    width: 100vw;
+    background-color: black;;
+    color: white;
+    text-align: center;
+}
