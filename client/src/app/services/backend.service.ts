@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ArtEvent } from '../interfaces/art-event';
+import { Login } from '../interfaces/login';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,16 @@ export class BackendService {
   constructor(private http: HttpClient) { }
 
   //----- Login
-  login() 
+  login(user: Login): Observable<any>
   {
-    
+    return this.http.post<any>('http://localhost:3000/user/login', user)
+    .pipe(map(user => {
+
+      localStorage.setItem('currentUser', JSON.stringify(user))
+      return user;
+      
+    }
+    ))
   }
 
   //----- Signup
