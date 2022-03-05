@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EventComponent } from './components/event/event.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
-  {path: '', component: EventComponent}
+  {path: '', component: EventComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent}
 ];
 
 @NgModule({
