@@ -7,16 +7,20 @@
     cursor: pointer;
   }
 
-  .mybtn:hover{
+  /* .mybtn:hover{
       background-color: gray;
       border: gray;
       color: white;
-  }
+  } */
 
   .blackbtn{
       background: black;
       color: white;
+
+      margin-right: 2em;
   }
+
+  
   
   /* .blackbtn:hover {
     background: white;

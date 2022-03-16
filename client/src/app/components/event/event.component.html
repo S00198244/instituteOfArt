@@ -1,37 +1,39 @@
 <div class="row justify-content-center">
-  <div class="col-8" *ngFor="let event of artEvents">
+  <div class="col-8" *ngFor="let event of artEvents$ | async" (click)="clicked(event)" style="margin-top: 2em;">
 
-    <div class="row hvr-grow-shadow" style="background-color: white; margin-top: 4em; ">
-
-        <div class="row">
-          <div class="col-md-6" style="background-color:black;">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-6">
-            <!-- <div class="card"> -->
-            <div class="card-body">
+    <div class="row hvr-grow-shadow" style="background-color: white; border-radius: 20px 15px 15px 20px">
+      <div class="col-6" style="background-color: black; border-radius: 15px 0px 0px 15px;">
+        <div class="card-body">
+          <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
               <h5 class="card-title">{{event.title}}</h5>
-              <p class="card-text">{{event.summary}}</p>
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-              <button type="button" class="mybtn blackbtn " style="margin: 1em;">Details</button>
-              <button type="button" class="mybtn">Book ticket</button>
+            </div>
+            <div class="col">
+              <div class="dropdown">
+                <button class="btn blackbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Options
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Edit</a>
+                  <a class="dropdown-item" href="#">Delete</a>
+                </div>
               </div>
-            <!-- </div> -->
+            </div>
           </div>
+
+          <p class="card-text">{{event.summary }}</p>
+          
+          <button type="button" class="btn blackbtn" (click)="goToEventDetails()">Details</button>
+          <button type="button" class="btn" style="background-color: white; border: solid black;">Book ticket</button>
         </div>
-
-      <!-- <div>
-
-       <button type="button btn-primary" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-
-        <div class="dropdown-menu">
-          <a class="dropdown-item" (click)="editArtEvent()">Edit</a>
-          <a class="dropdown-item" style="color: tomato;" (click)="deleteCard()">Delete</a>
-        </div>
-      </div> -->
-
       </div>
     </div>
+
+  </div>
 </div>
+

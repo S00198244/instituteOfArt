@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { EventComponent } from './components/event/event.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,

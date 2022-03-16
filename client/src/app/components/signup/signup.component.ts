@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-
-import { BackendService } from 'src/app/services/backend.service';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,9 +21,10 @@ export class SignupComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required]),
   });
+
   signup: any;
 
-  constructor(private router: Router, private service: BackendService) { }
+  constructor(private router: Router, private sessionService: SessionService) { }
 
   ngOnInit() { }
 
@@ -36,7 +35,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.service.signup(this.signupForm.value)
+    this.sessionService.signup(this.signupForm.value)
       .subscribe(() => {
         // Successful signup
         this.router.navigate(['/']);
@@ -48,7 +47,4 @@ export class SignupComponent implements OnInit {
         }
       );
   }
-
-
-
 }
