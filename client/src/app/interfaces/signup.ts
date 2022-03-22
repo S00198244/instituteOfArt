@@ -1,6 +1,6 @@
 export interface Signup{
-    firstname: string,
-    lastname: string,
+    firstName: string,
+    lastName: string,
     email: string,
-    pass: string
+    password: string
 }

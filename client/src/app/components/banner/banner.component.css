@@ -1,0 +1,22 @@
+.banner-container{
+    height: 10vh;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;                                   
+}
+
+/* .banner{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+} */
+
+.white-text{
+    color: white;
+    text-decoration: none;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    margin: 1em;
+}

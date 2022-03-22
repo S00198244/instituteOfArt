@@ -9,6 +9,8 @@ import { EventComponent } from './components/event/event.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { EventDetailsComponent } from './components/event-details/event-details.
     EventComponent,
     LoginComponent,
     SignupComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    GalleryComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,

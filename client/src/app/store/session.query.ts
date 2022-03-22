@@ -7,14 +7,19 @@ export class SessionQuery extends Query<SessionState> {
 
     name$ = this.getValue().firstName;
     
-    userID$ = this.select((state) => state.userID);
+    userID$ = this.select((state) => state._id);
 
-    userId$ = this.getValue().userID;
+    userId$ = this.getValue()._id;
 
     //$userDetails = this.select(['userID','firstName','lastName','email','accessToken']);
-    $userDetails = this.getValue();
+    
+    userDetails$ = this.getValue();
 
   constructor(protected store: SessionStore) {
     super(store);
+  }
+
+  get isLoggedIn() {
+    return !!this.getValue().accessToken;
   }
 }

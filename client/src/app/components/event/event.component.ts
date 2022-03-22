@@ -6,6 +6,7 @@ import { ArtEvent } from 'src/app/interfaces/art-event';
 import { EventService } from 'src/app/services/event.service';
 import { EventQuery } from 'src/app/store/event.query';
 import { EventState } from 'src/app/store/event.store';
+import { SessionQuery } from 'src/app/store/session.query';
 
 
 @Component({
@@ -28,9 +29,11 @@ export class EventComponent implements OnInit, OnDestroy {
   // message?: string;
   // currentEvent!: ArtEvent;
 
-  constructor(private service: EventService, private router: Router, private artEventQuery: EventQuery) { }
+  constructor(private service: EventService, private router: Router, private artEventQuery: EventQuery, private sessionQuery: SessionQuery) { }
 
   ngOnInit(): void {
+
+    console.log(this.sessionQuery.userDetails$);
 
     this.listEventSub = this.artEventQuery.selectAreEventsLoaded$.pipe(
       filter(areEventsLoaded => !areEventsLoaded),

@@ -1,8 +1,10 @@
 const crypto = require('crypto');
 const { User, validate } = require('../models/user');
+const jwt = require('jsonwebtoken')
 
-const ACCESS_TOKEN_SECRET = "";
-const secret = ACCESS_TOKEN_SECRET;
+// process.env.ACCESS_TOKEN_SECRET ||
+
+const secret = "242c7393bada6fdcc97ed8feadc2cdfb681774d4f6b5444e24bcb02e5b155f46897e2f7c2e9c4fc92464a3b1096a70ab463a4322ae2edb763e1b0c1075063b58";
 
 class userController
 {
@@ -46,10 +48,12 @@ class userController
 
     let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
     if (hash !== passwordFields[1]) {
-        return res.status(400).send({ errors: ['Invalid e-mail or password'] });
+        return res.status(400).json({ errors: ['Invalid e-mail or password'] });
     }
 
     // here we know the received password is the same as the one stored.
+
+    // ----- JWT config 
 
     // set the payload for the jwt.
     let payload = {};
@@ -62,7 +66,7 @@ class userController
 
     let token = jwt.sign(payload, secret, { expiresIn: 60 });
 
-    setRefreshCookie(user, res);
+    // setRefreshCookie(user, res);
 
     res.status(201).json({ 
     accessToken: token,
@@ -70,42 +74,29 @@ class userController
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email });
+
     console.log('login success');
 
-  }
-    // Setting a refresh cookie
-
-  setRefreshCookie(user, res)  
-  {
-    let refreshToken = createRefreshToken(user);
-
-    res.cookie('refreshtoken', refreshToken, {
-    httpOnly: true,
-    //path: '/auth/refresh',
-    sameSite: 'none',
-    secure : true,
-  
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7d
-    })
-  }
-
-  createRefreshToken(user, res)
-  {
-    return 'test4';
   }
 
   //____________________________________________________________________________________________________ Signup function
 
   async signup(req, res)
   {
-    console.log('Signup function called');
+    console.log('Signup function called | user controller');
 
-    let result = validate(req.body)
+    delete req.body.confirmPassword;
+
+    // console.log(req.body);
+
+    let result = validate(req.body);
   
     if (result.error) {
       res.status(400).json(result.error);
       return;
     }
+
+    console.log('Passed validation');
   
     // Check if a user with that e-mail already exists
     let user = await User.findOne({ email: req.body.email });
@@ -118,12 +109,36 @@ class userController
     req.body.password = salt + '$' + hash;
   
     user = new User(req.body);
+
     user = await user.save();
-  
-    // Note we don't want to return the entire user object as that includes the password.
-    res.location(user._id).
-      status(201).
-      json(user._id);
+
+    // ----- JWT config 
+
+    // set the payload for the jwt.
+    let payload = {};
+    payload._id = user._id;
+    payload.email = user.email;
+    payload.firstName = user.firstName;
+    payload.lastName = user.lastName;
+
+    // sign the jwt and return it in the body of the request.     
+
+    console.log("Creating token");
+
+    console.log('Secret : ' + secret);
+
+    let token = jwt.sign(payload, secret, { expiresIn: 60 });
+
+    // setRefreshCookie(user, res);
+
+    res.status(201).json({ 
+    accessToken: token,
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email });
+    
+    console.log('Signup success');
   }
 
   //____________________________________________________________________________________________________ Delete account function
@@ -145,7 +160,27 @@ class userController
       console.log(error)
       res.status(404).json(`User with that ID ${req.params.id} was not found`);
     }
+  }
 
+  //____________________________________________________________________________________________________ Cookies
+
+  setRefreshCookie(user, res)  
+  {
+    let refreshToken = createRefreshToken(user);
+
+    res.cookie('refreshtoken', refreshToken, {
+    httpOnly: true,
+    //path: '/auth/refresh',
+    sameSite: 'none',
+    secure : true,
+  
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7d
+    })
+  }
+
+  createRefreshToken(user, res)
+  {
+    return 'test4';
   }
 
 }

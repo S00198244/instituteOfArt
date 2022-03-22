@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 import { ArtEvent } from '../interfaces/art-event';
 import { EventStore } from '../store/event.store';
 import { EventQuery } from '../store/event.query';
@@ -12,7 +12,7 @@ import { EventQuery } from '../store/event.query';
 })
 export class EventService {
 
-  private url = 'http://localhost:8080/api';
+  private url = 'https://localhost:8080/api/v1';
 
   constructor(private http: HttpClient, private eventStore: EventStore, private eventQuery: EventQuery) { }
 
@@ -27,15 +27,16 @@ export class EventService {
 
     getEvents(): Observable<ArtEvent[]> {
 
-      console.log("getEvents service functions")
-  
-      const url = 'http://localhost:8080/api/events';
-  
-      return this.http.get<ArtEvent[]>(url).pipe(
+      console.log("getEvents service functions");
+
+      return this.http.get<ArtEvent[]>(`${this.url}/events`).pipe(
         tap(event => {
           this.eventStore.loadEvents(event, true) // [event]
         }
-      ));
+      ),
+      retry(1),
+      catchError(this.handleError)
+      );
     }
 
     // createEvent() - Create an event
@@ -47,7 +48,9 @@ export class EventService {
       return this.http.post<ArtEvent>(`${this.url}/events`, event).pipe(
         tap(event => {
           this.eventStore.add([event])
-        })
+        }),
+        retry(1),
+        catchError(this.handleError)
       );
 
     }
@@ -62,7 +65,9 @@ export class EventService {
       return this.http.put(`${this.url}/event/${eventID}`, event).pipe(
         tap(result => {
           this.eventStore.update(eventID, event)
-        })
+        }),
+        retry(1),
+        catchError(this.handleError)
       );
     }
 
@@ -75,9 +80,10 @@ export class EventService {
       return this.http.delete(`${this.url}/event/${eventID}`).pipe(
         tap(result => {
           this.eventStore.remove(eventID);
-        })
+        }),
+        retry(1),
+        catchError(this.handleError)
       );
-
     }
 
     private handleError(error: HttpErrorResponse) {

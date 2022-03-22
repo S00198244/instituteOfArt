@@ -6,7 +6,7 @@ export interface SessionState {
     firstName: string,
     lastName: string,
     email: string,
-    userID: number
+    _id: string
 }
 
 export function createInitialState(): SessionState {
@@ -15,7 +15,7 @@ export function createInitialState(): SessionState {
         firstName: '',
         lastName: '',
         email: '',
-        userID: 0
+        _id: ''
     };
 }
 

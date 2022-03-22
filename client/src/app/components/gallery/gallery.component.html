@@ -1,0 +1,30 @@
+<form [formGroup]="galleryForm" (ngSubmit)="onSubmit()" style="margin-top: 2em;">
+    <div class="row"> <!-- </div> style="background-color: lightgrey;"> -->
+        <div class="col-10">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="query" formControlName="query">
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+<div class="row" style="justify-content: space-around; text-align: center;">
+    <div style="width: auto;" *ngFor="let artPiece of artPieces" class="col-xs-4 mb-3 card-rows"> <!-- (click)="clicked(stack)" -->
+
+        <div class="card mx-auto card-main">
+            <div class="card-body">
+                <h3 class="card-title">{{artPiece.title}}</h3>
+                <p class="card-text">{{artPiece.artistDisplayName}}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
