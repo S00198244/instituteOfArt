@@ -57,13 +57,16 @@ export class EventService {
 
     // updateEvent() - Update an event
 
-    updateEvent(eventID: string, event: ArtEvent): Observable<any> {
+    updateEvent(eventID: string, event: ArtEvent): Observable<ArtEvent> {
 
       console.log("In updateEvent() | (event.service.ts)");
-      console.log(eventID);
 
-      return this.http.put(`${this.url}/event/${eventID}`, event).pipe(
-        tap(result => {
+      console.log(`${this.url}/event/${eventID}`);
+
+      // 'https://localhost:8080/api/v1'
+
+      return this.http.patch<ArtEvent>(`${this.url}/event/${eventID}`, event).pipe(
+        tap(event => {
           this.eventStore.update(eventID, event)
         }),
         retry(1),

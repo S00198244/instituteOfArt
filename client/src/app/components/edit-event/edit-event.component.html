@@ -1,0 +1,16 @@
+<form [formGroup]="eventForm" class="h-100">
+    <div class="h-25 centered" style="background-color: white; margin: 0px 20px 0px 20px" > <!-- top - right - bottom - left -->
+        
+        <input type="text" class="form-control form-control-lg" id="title" formControlName="title" placeholder="Enter title"/>
+        
+    </div>
+    <div class="h-75" style="color: white; padding: 2em; background-color: black; margin: 0px 20px 0px 20px">
+
+        <textarea class="form-control" id="summary" formControlName="summary" placeholder="Enter some text" rows="3"></textarea>
+
+        <button class="btn btn-outline-light btn-space" (click)="updateEvent()">Update</button>
+
+    </div>
+</form>
+
+

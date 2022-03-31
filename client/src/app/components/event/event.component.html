@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-8" *ngFor="let event of artEvents$ | async" (click)="clicked(event)" style="margin-top: 2em;">
+  <div class="col-10" *ngFor="let event of artEvents$ | async" style="margin-top: 2em;">
 
     <div class="row hvr-grow-shadow" style="background-color: white; border-radius: 20px 15px 15px 20px">
       <div class="col-6" style="background-color: black; border-radius: 15px 0px 0px 15px;">
@@ -9,31 +9,102 @@
       </div>
       <div class="col-6">
         <div class="card-body">
+
+          <h5 class="card-title">{{event.title}}</h5>
+
+          <p class="card-text">{{event.summary }}</p>
+
           <div class="row">
             <div class="col">
-              <h5 class="card-title">{{event.title}}</h5>
+          <button type="button" class="btn btn-outline-dark btn-space" (click)="goToEventDetails(event)">Details</button>
+
+            </div>
+            <div class="col">
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-dark btn-space" data-toggle="modal" data-target="#exampleModal">Book</button>
+
             </div>
             <div class="col">
               <div class="dropdown">
-                <button class="btn blackbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-dark btn-space dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Options
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Edit</a>
-                  <a class="dropdown-item" href="#">Delete</a>
+                  <a class="dropdown-item" (click)="goToEditEvent(event)">Edit</a>
+                  <a class="dropdown-item" (click)="deleteEvent(event._id)">Delete</a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <p class="card-text">{{event.summary }}</p>
-          
-          <button type="button" class="btn blackbtn" (click)="goToEventDetails()">Details</button>
-          <button type="button" class="btn" style="background-color: white; border: solid black;">Book ticket</button>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
+<button type="button" class="material-icons md-36 btn btn-lg add-event-btn hvr-grow-shadow" data-toggle="modal" data-target="#createEventModal">add</button> <!-- (click)="openDialog()" --> 
+
+<!-- Modal (Booking a ticket) -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Book a date</h5>
+        <button type="button" class="close material-icons close-btn" data-dismiss="modal" aria-label="Close">
+          <!-- <span aria-hidden="true">&times;</span> -->
+          close
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <label for="date">Select date</label>
+          <input type="date" id="date" name="date" style="margin-left: 0.5em;">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-dark">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal (Creating an event) -->
+<div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a new event</h5>
+        <button type="button" class="close material-icons close-btn" data-dismiss="modal" aria-label="Close">
+          <!-- <span aria-hidden="true">&times;</span> -->
+          close
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="eventForm">
+
+          <div class="form-group">
+            <label for="title">Event Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter event title">
+          </div>
+
+          <br/>
+
+          <div class="form-group">
+            <label for="summary">Event Summary</label>
+            <input type="textarea" class="form-control" id="summary" formControlName="summary" placeholder="Enter event summary">
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button #btnClose id="btnClose" type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="addEvent()">Add event</button>
+      </div>
+    </div>
+  </div>
+</div>

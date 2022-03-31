@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
     title: String,
+    summary: String
     },
 );
 
 function validateEvent(event) {
     const schema = Joi.object({
-        title: Joi.string()
+        title: Joi.string(),
+        summary: Joi.string()
     })
     return schema.validate(event);
 }

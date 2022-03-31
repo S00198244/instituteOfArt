@@ -20,6 +20,18 @@
       margin-right: 2em;
   }
 
+  .btn-space{
+    margin: 0.5em;
+  }
+
+  .close-btn{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
   
   
   /* .blackbtn:hover {
@@ -49,3 +61,19 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
+
+  .add-event-btn{
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    background-color: white;
+    color: black;
+
+    position: fixed;
+    right: 30px;
+    bottom: 150px;
+}
+
+.material-icons.md-36 { 
+  font-size: 36px;
+}

@@ -5,6 +5,8 @@ import { SessionStore, SessionState } from './session.store';
 @Injectable({ providedIn: 'root' })
 export class SessionQuery extends Query<SessionState> {
 
+    accessToken$ = this.select((state) => state.accessToken);
+
     name$ = this.getValue().firstName;
     
     userID$ = this.select((state) => state._id);
@@ -19,7 +21,15 @@ export class SessionQuery extends Query<SessionState> {
     super(store);
   }
 
+  // Returns boolean value
+
   get isLoggedIn() {
+
     return !!this.getValue().accessToken;
+  }
+
+  get isAdmin() {
+
+    return this.getValue().admin;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
 import { SessionQuery } from 'src/app/store/session.query';
 
@@ -9,13 +10,21 @@ import { SessionQuery } from 'src/app/store/session.query';
 })
 export class BannerComponent implements OnInit {
 
-  loggedIn!: boolean;
+  // accessToken$!: Observable<string | null>;
+
+  isLoggedIn!: boolean;
 
   constructor(private sessionQuery: SessionQuery, private sessionService: SessionService) {
-    this.loggedIn = this.sessionQuery.isLoggedIn;
+
+    // this.accessToken$ = this.sessionQuery.accessToken$;
+
+    this.isLoggedIn = sessionQuery.isLoggedIn;
+    
   }
 
   ngOnInit(): void {
+
+    console.log(this.isLoggedIn);
   }
 
   logout() {

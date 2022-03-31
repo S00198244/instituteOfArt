@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
@@ -16,22 +17,34 @@ import { SessionQuery } from 'src/app/store/session.query';
 })
 export class EventComponent implements OnInit, OnDestroy {
 
+  closeResult!: '';
+
+  /*
   eventToBeUpdated: ArtEvent | any;
   isUpdateActivated = false;
+  updateEventSub!: Subscription;
+  */
+
   listEventSub!: Subscription;
   deleteEventSub!: Subscription;
-  updateEventSub!: Subscription;
   estate!: EventState;
 
   artEvents$: Observable<ArtEvent[]> = this.artEventQuery.artEvents$;
 
-  // artEvents!: ArtEvent[];
-  // message?: string;
-  // currentEvent!: ArtEvent;
+  eventForm!: FormGroup;
 
-  constructor(private service: EventService, private router: Router, private artEventQuery: EventQuery, private sessionQuery: SessionQuery) { }
+  @ViewChild('btnClose')
+  btnClose!: ElementRef;
 
-  ngOnInit(): void {
+  constructor(private service: EventService, private router: Router, private artEventQuery: EventQuery, private sessionQuery: SessionQuery) {
+
+    this.eventForm = new FormGroup({
+      title: new FormControl(null, Validators.required),
+      summary: new FormControl(null, Validators.required)
+    })
+   }
+
+  ngOnInit() {
 
     console.log(this.sessionQuery.userDetails$);
 
@@ -56,26 +69,23 @@ export class EventComponent implements OnInit, OnDestroy {
       this.deleteEventSub.unsubscribe();
     }
 
+    /*
     if (this.updateEventSub) {
       this.updateEventSub.unsubscribe();
     }
+    */
   }
 
-  clicked(event: ArtEvent): void {
-
-    console.table(event);
+  setActiveEvent(event: ArtEvent) {
 
     this.service.setActive(event._id);
-
-    // this.currentEvent = event;
-    // console.table(this.currentEvent);
-
-    // Setting clicked event in store
-    // this.service.updateEvent(this.currentEvent);
-
+    
   }
 
-  goToEventDetails() {
+  goToEventDetails(event: ArtEvent) {
+
+    this.setActiveEvent(event);
+
     this.router.navigate(['/eventDetails']);
   }
 
@@ -87,12 +97,11 @@ export class EventComponent implements OnInit, OnDestroy {
     });
   }
 
-  showUpdateForm(event: Event) {
+  /* 
+    showUpdateForm(event: Event) {
     this.isUpdateActivated = true;
     this.eventToBeUpdated = {...event};
   }
-
-  // updateEvent()
 
   updateEvent(updateForm: { value: ArtEvent; }) {
     this.updateEventSub = this.service.updateEvent(
@@ -101,4 +110,27 @@ export class EventComponent implements OnInit, OnDestroy {
     this.isUpdateActivated = false;
     this.eventToBeUpdated = null;
   }
+  */
+
+  goToEditEvent(event: ArtEvent) {
+
+    this.setActiveEvent(event);
+
+    this.router.navigate(['/editEvent']);
+  }
+
+  addEvent() {
+
+    console.log('In addEvent()');
+
+    console.log(this.eventForm.value);
+
+    this.service.createEvent(this.eventForm.value).subscribe((res) => console.log(res));
+
+    this.btnClose.nativeElement.click();
+
+    this.eventForm.reset();
+  }
+
+
 }

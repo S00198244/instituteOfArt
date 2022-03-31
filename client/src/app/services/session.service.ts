@@ -5,7 +5,6 @@ import { Signup } from '../interfaces/signup';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Login } from '../interfaces/login';
-import { User } from '../interfaces/user';
 import { resetStores } from '@datorama/akita';
 
 @Injectable({ providedIn: 'root' })
@@ -57,7 +56,9 @@ export class SessionService {
     }
 
     public logout() {
+
       resetStores({ exclude: ['artEvents']});
+
     }
 
     private handleError(error: HttpErrorResponse) {

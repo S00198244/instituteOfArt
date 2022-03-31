@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { EntityStore, StoreConfig, EntityState } from '@datorama/akita';
 
 export interface SessionState {
-    accessToken: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    _id: string
+    accessToken: string | null,
+    firstName: string | null,
+    lastName: string | null,
+    email: string | null,
+    _id: string | null,
+    admin: boolean
 }
 
 export function createInitialState(): SessionState {
     return {
-        accessToken: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        _id: ''
+        accessToken: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        _id: null,
+        admin: false
     };
 }
 

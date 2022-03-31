@@ -6,13 +6,14 @@ import { EventStore, EventState } from './event.store';
 export class EventQuery extends QueryEntity<EventState> {
 
   // Select an entity by id
-   artEvent$ = this.selectActive();
+  artEvent$ = this.selectActive();
 
-    selectAreEventsLoaded$ = this.select(state => {
+  selectAreEventsLoaded$ = this.select(state => {
 
-    console.log(state.areEventsLoaded);
+  console.log(state.areEventsLoaded);
     
-    return state.areEventsLoaded;
+  return state.areEventsLoaded;
+  
   });
 
   // Observable

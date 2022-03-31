@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { ArtEvent } from '../interfaces/art-event';
-import { EntityStore, StoreConfig, EntityState, ActiveState } from '@datorama/akita';
+
+import { EntityStore, StoreConfig, EntityState, ActiveState, ID } from '@datorama/akita';
 
 export interface EventState extends EntityState<ArtEvent, string>, ActiveState {
 
@@ -36,6 +38,8 @@ export class EventStore extends EntityStore<EventState> {
     super(createInitialState());
   }
 
+  // Load events
+
   loadEvents(artEvents: ArtEvent[], areEventsLoaded: boolean) {
 
     this.set(artEvents);
@@ -48,3 +52,5 @@ export class EventStore extends EntityStore<EventState> {
     }));
   }
 }
+
+

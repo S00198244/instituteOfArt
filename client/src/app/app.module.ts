@@ -11,6 +11,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { EditEventComponent } from './components/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BannerComponent } from './components/banner/banner.component';
     SignupComponent,
     EventDetailsComponent,
     GalleryComponent,
-    BannerComponent
+    BannerComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,
