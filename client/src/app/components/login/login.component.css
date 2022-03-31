@@ -9,9 +9,9 @@
     background-color: black;
 }
 
-label{
+/* label{
     color: white;
-}
+} */
 
 .mybtn {
     border: 2px solid black;
@@ -28,7 +28,6 @@ label{
       color: white;
   } */
 
-  input{
-    margin-top: .5em;
-    margin-bottom: .5em;
+input{
+    margin-top: 2em;
 }

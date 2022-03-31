@@ -36,7 +36,7 @@ class userController
 
     let user = await User.findOne({ email: req.body.email });
 
-    if (!user) return res.status(400).send('Invalid email or password');
+    if (!user) return res.status(400).json('Invalid email or password');
 
     // get the stored salt from the stored passport field
 

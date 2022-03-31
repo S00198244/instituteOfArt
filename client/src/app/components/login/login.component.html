@@ -1,40 +1,45 @@
-<body>
-    <div class="card login-card">
-      <div class="card-body">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          
-          <div class="form-group">
-  
-            <label for="email">Email</label>
-            <div *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.errors &&  (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)">
-              <small id="email-error-msg" class="text-danger" *ngIf="loginForm.get('email')!.errors?.required">Email is required.</small>
-            </div>
-            <input id="email" type="email" class="form-control" formControlName="email" [ngClass]="{ invalid: loginForm.get('email')!.invalid && (loginForm.get('email')!.dirty || loginForm.get('email')!.touched) }"/>
-            <!-- <p>Email: {{ email.value }}</p> To test for successful binding -->
-          </div>
-  
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              class="form-control"
-              formControlName="password"
-            />
-          </div>
-  
-          <button id="button" type="submit" class="btn mybtn" style="margin: 10%" [disabled]="loginForm.invalid">
-            Log in
-          </button>
+<div class="card login-card">
 
-          <div class="row">
-            <div class="col">
-              <a routerLink="/signup">Don't have an account? Create one here</a>
-            </div>
-          </div>
-        </form>
+  <div class="card-body">
+    <h5 class="card-title" style="color: white;">Login</h5>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Email -->
+
+      <!-- <div *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.errors && (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)">
+        <small id="email-error-msg" class="text-danger" *ngIf="loginForm.get('email')!.errors?.required">Email is required</small>
+      </div> -->
+
+      <div class="form-floating mb-3 input-space">
+
+        <input type="email" class="form-control" id="floatingInput" formControlName="email" placeholder="" required>
+
+        <label for="floatingInput">Email address</label>
       </div>
-      <div class="card" *ngIf="authErrorMsg" style="width: auto; padding: 10px; border-radius: 5px;">{{ authErrorMsg }}</div>
-    </div>
-  </body>
-  
+
+      <!-- Password -->
+
+      <!-- <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.errors && (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)">
+        <small id="password-error-msg" class="text-danger" *ngIf="loginForm.get('password')!.errors?.required">Password is required</small>
+      </div> -->
+
+      <div class="form-floating input-space">
+        <input type="password" class="form-control" id="floatingPassword" formControlName="password" placeholder="" required>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <div *ngIf="authError" style="color: red;"><p>{{ authErrorMsg }}</p></div>
+
+      <div class="row" style="margin-top: 2em;">
+        <div class="col">
+          <button id="button" type="submit" class="btn btn-outline-light" [disabled]="loginForm.invalid">Log in</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-light" routerLink="/signup">Signup</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

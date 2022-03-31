@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   authErrorMsg!: string;
 
   loginForm = new FormGroup({
-    email: new FormControl([''], Validators.required),
-    password: new FormControl([''], Validators.required),
+    email: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
   });
 
   constructor(private sessionService: SessionService, private router: Router) { }
@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
+
+    console.log("In onSubmit()");
+
     this.submitted = true;
 
     if (this.loginForm.invalid) {
@@ -38,8 +41,8 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           // Failed login
-          this.authError = true;
-          (this.authErrorMsg = error.error.msg)
+          this.authError = true,
+          (this.authErrorMsg = error.error)
         });
   }
 

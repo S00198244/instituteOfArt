@@ -1,47 +1,57 @@
-    <div class="card signup-card">
-      <div class="card-body">
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-          
-          <div class="row">
-            <div class="col-md-6">
-              <label for="firstname">First Name</label>
-              <input id="firstname" type="text" class="form-control" formControlName="firstName"/>
-            </div>
-            
-            <div class="col-md-6">
-              <label for="surname">Surname</label>
-              <input id="surname" type="text" class="form-control" formControlName="lastName"/>
-            </div>
+<div class="card signup-card">
+  <div class="card-body">
+    <h5 class="card-title" style="color: white;">Signup</h5>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      
+      <!-- First Name & Last Name -->
+
+      <div class="row">
+        <div class="col">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingFirstName" formControlName="firstName" placeholder="" required>
+            <label for="floatingFirstName">First Name</label>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" class="form-control" formControlName="email" required/>
+        <div class="col">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingSurname" formControlName="lastName" placeholder="" required>
+            <label for="floatingSurname">Surname</label>
           </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" type="password" class="form-control" formControlName="password"/>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Confirm Password</label>
-            <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword"/>
-          </div>
-
-          <button id="button" type="submit" class="btn mybtn" style="margin: 10%">
-           <!-- [disabled]="signupForm.invalid" -->
-            Create account
-          </button>
-
-          <div class="row">
-            <div class="col">
-              <a routerLink="/login">Have an account? Log in here</a>
-            </div>
-          </div>
-
-        </form>
+        </div>
       </div>
-      <div class="card" *ngIf="authErrorMsg" style="width: auto; padding: 10px; border-radius: 5px;">{{ authErrorMsg }}</div>
-    </div>
-  
+
+      <!-- Email -->
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" formControlName="email" placeholder="" required>
+        <label for="floatingInput">Email address</label>
+      </div>
+
+      <!-- Password -->
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" formControlName="password" placeholder="" required>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <!-- Confirm Password -->
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingConfirmPassword" formControlName="confirmPassword" placeholder="" required>
+        <label for="floatingConfirmPassword">Confirm Password</label>
+      </div>
+
+      <div *ngIf="authError" style="color: red;"><p>{{ authErrorMsg }}</p></div>
+
+      <div class="row" style="margin-top: 2em;">
+        <div class="col">
+          <button id="button" type="submit" class="btn btn-outline-light" [disabled]="signupForm.invalid">Signup</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-light" routerLink="/login">Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -11,27 +11,27 @@ import { SessionQuery } from 'src/app/store/session.query';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
   submitted = false;
   authError = false;
   authErrorMsg!: string;
 
   signupForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
+    firstName: new FormControl(null, Validators.required),
+    lastName: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required]),
+    confirmPassword: new FormControl(null, [Validators.required]),
   });
-
-  signup: any;
 
   constructor(private router: Router, private session: SessionService, private sessionQuery: SessionQuery) { }
 
-  ngOnInit() { 
-
-  }
+  ngOnInit() { }
 
   onSubmit() {
+
+    console.log("In onSubmit()");
+
     this.submitted = true; 
 
     if (this.signupForm.invalid) {
@@ -39,16 +39,14 @@ export class SignupComponent implements OnInit {
     }
 
     this.session.signup(this.signupForm.value)
-      .subscribe((res) => {
+      .subscribe(() => {
         // Successful signup
-        console.log(res),
-        console.log(this.sessionQuery.name$);
         this.router.navigate(['/']);
       },
       (error) => {
         // Failed signup
         this.authError = true;
-        (this.authErrorMsg = error.error.msg)
+        (this.authErrorMsg = error.error)
       });
   }
 }

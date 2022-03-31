@@ -34,6 +34,8 @@ export class SessionService {
       // Login (post) a user
 
       public login(user: Login): Observable<any> {
+
+        console.log("In login()");
     
         return this.http.post<any>(`${this.url}/login`, user)
         .pipe(tap(user => {
@@ -48,6 +50,15 @@ export class SessionService {
             email: user.email,
             _id: user._id
           }));
+
+          // if admin - set admin
+
+          if(user.email == 'admin@mail.com')
+          {
+            this.sessionStore.update(() => ({
+              admin: true
+            }))
+          }
       })
       // ,
       // retry(1),
