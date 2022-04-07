@@ -2,7 +2,7 @@ const { Event, validate } = require('../models/event');
 
 class eventController{
 
-    // getEvents() - Get events
+    // Get events
 
     async getEvents(req, res)
     {
@@ -83,7 +83,7 @@ class eventController{
         }
     }
 
-    // deleteEvent() - Delete an event
+    // Delete an event
 
     async deleteEvent(req, res) 
     {
@@ -102,6 +102,76 @@ class eventController{
         catch (error) {
             console.log(error)
             res.status(404).json(`Event with id of ${req.params.id} was not found`);
+        }
+    }
+
+    // Get comments
+
+    async getComments(req, res)
+    {
+        console.log("In getComments()");
+
+        try {
+
+        }
+        catch (error) {
+
+        }
+    }
+
+    // Add comment
+
+    async addComment(req, res)
+    {
+        console.log("In addComment()");
+
+        try {
+
+        }
+        catch (error) {
+
+        }
+    }
+
+    // Edit comment
+
+    async editComment(req, res)
+    {
+        console.log("In editComment()");
+
+        try {
+
+        }
+        catch (error) {
+
+        }
+    }
+
+    // Delete comment
+
+    async deleteComment(req, res)
+    {
+        console.log("In deleteComment()");
+
+        try {
+
+        }
+        catch (error) {
+
+        }
+    }
+
+    // Delete comments
+
+    async deleteComments(req, res)
+    {
+        console.log("In deleteComments()");
+
+        try {
+
+        }
+        catch (error) {
+
         }
     }
 
