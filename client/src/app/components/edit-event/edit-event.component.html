@@ -11,23 +11,89 @@
           </div>
         
     </div>
-    <div class="h-75" style="color: white; padding: 2em; background-color: black; margin: 0px 20px 0px 20px">
+    <div class="h-75" style="padding: 2em; background-color: black; margin: 0px 20px 0px 20px">
 
-        <!-- Summary -->
+        <div class="row" style="margin-bottom: 2em;">
+            <div class="col">
+                <!-- Summary -->
 
-        <textarea class="form-control" id="summary" formControlName="summary" placeholder="Enter some text" rows="3"></textarea>
-
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Summary" formControlName="summary" id="floatingTextarea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea">Summary</label>
+                </div>
+            </div>
+        </div>
+       
         <!-- Art -->
 
-        <div class="row">
-
+        <div class="row" style="margin-bottom: 2em;">
+            <div class="col" *ngFor="let artPiece of eventArtPieces">
+                <div class="card">
+                    <!-- <img class="card-img-top" src={{artPiece.primaryImageSmall}} alt="Card image cap"> -->
+                    <div class="card-body">
+                      <h5 class="card-title">{{artPiece.title}}</h5>
+                      <p class="card-text">{{artPiece.artistDisplayName}}</p>
+                    </div>
+                  </div>
+            </div>
         </div>
 
-        <button class="btn btn-light">Add art</button>
-
-        <button class="btn btn-outline-light btn-space" (click)="updateEvent()">Update</button>
-
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter">Add Art</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-light" (click)="updateEvent()">Update</button>
+            </div>
+        </div>
     </div>
 </form>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Select art</h5>
+          <button type="button" class="close material-icons close-btn" data-dismiss="modal" aria-label="Close">
+            <!-- <span aria-hidden="true">&times;</span> -->
+            close
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="galleryForm" (ngSubmit)="onSubmit()">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="query" placeholder="" required>
+                    <label for="floatingInput">Query</label>
+                </div>
+
+                <button class="btn btn-outline-dark" type="submit" style="margin-top: 1em; margin-bottom: 1em;">Search</button>
+
+            </form>
+
+            <div class="row g-5">
+                <div *ngFor="let artPiece of artPieces" (click)="clicked(artPiece)" class="col-6"> <!-- (click)="clicked(stack)" -->
+                    <div class="card text-white bg-dark">
+                        <!-- <img class="card-img-top" src={{artPiece.primaryImageSmall}} alt="Card image cap"> -->
+                        <div class="card-body">
+                          <h5 class="card-title">{{artPiece.title}}</h5>
+                          <p class="card-text">{{artPiece.artistDisplayName}}</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+            <h5>{{selectedArtPiece.title}}</h5>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-dark" (click)="addArtPieceToEvent()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 

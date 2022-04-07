@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-10" *ngFor="let event of artEvents$ | async" style="margin-top: 2em;">
+  <div class="col-10" *ngFor="let event of artEvents$ | async" (click)="clicked(event)" style="margin-top: 2em;">
 
     <div class="row hvr-grow-shadow" style="background-color: white; border-radius: 20px 15px 15px 20px">
       <div class="col-6" style="background-color: black; border-radius: 15px 0px 0px 15px;">

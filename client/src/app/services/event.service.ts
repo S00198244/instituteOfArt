@@ -61,6 +61,8 @@ export class EventService {
 
       console.log("In updateEvent() | (event.service.ts)");
 
+      console.table(event);
+
       console.log(`${this.url}/event/${eventID}`);
 
       // 'https://localhost:8080/api/v1'

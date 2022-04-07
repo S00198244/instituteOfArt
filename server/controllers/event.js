@@ -62,7 +62,8 @@ class eventController{
 
         const data = {
             title: req.body.title,
-            summary: req.body.summary
+            summary: req.body.summary,
+            art: req.body.art
         }
 
         console.log(data);

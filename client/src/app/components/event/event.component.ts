@@ -123,6 +123,12 @@ export class EventComponent implements OnInit, OnDestroy {
     this.router.navigate(['/editEvent']);
   }
 
+  clicked(event: ArtEvent) {
+
+    console.table(event);
+
+  }
+
   addEvent() {
 
     console.log('In addEvent()');
