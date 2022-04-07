@@ -1,3 +1,6 @@
+<div class="container">
+
+
 <form [formGroup]="galleryForm" (ngSubmit)="onSubmit()" style="margin-top: 2em;">
     <div class="row"> <!-- </div> style="background-color: lightgrey;"> -->
         <div class="col-10">
@@ -9,19 +12,32 @@
     </div>
 </form>
 
-<div class="row" style="justify-content: space-around; text-align: center;">
-    <div style="width: auto;" *ngFor="let artPiece of artPieces" class="col-xs-4 mb-3 card-rows"> <!-- (click)="clicked(stack)" -->
+<br/>
 
-        <div class="card mx-auto card-main">
+<div class="row g-5">
+
+    <div *ngFor="let artPiece of artPieces" class="col-3"> <!-- (click)="clicked(stack)" -->
+
+        <!-- <div class="card bg-dark mx-auto">
             <div class="card-body">
+                <img src={{artPiece.primaryImageSmall}} style="width: 300px; height: 300px">
                 <h3 class="card-title">{{artPiece.title}}</h3>
                 <p class="card-text">{{artPiece.artistDisplayName}}</p>
             </div>
-        </div>
+        </div> -->
+
+        <div class="card text-white bg-dark">
+            <img class="card-img-top" src={{artPiece.primaryImageSmall}} alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{artPiece.title}}</h5>
+              <p class="card-text">{{artPiece.artistDisplayName}}</p>
+              <a href="#" class="btn btn-light">Details</a>
+            </div>
+          </div>
 
     </div>
 </div>
-
+</div>
 
 
 

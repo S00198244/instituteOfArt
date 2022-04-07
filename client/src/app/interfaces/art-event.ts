@@ -1,10 +1,12 @@
 import { ID } from "@datorama/akita"
+import { Art } from "./art";
 
 export interface ArtEvent {
     _id: string,
-    title: string
-    summary: string
-    comments: Comment[];
+    title: string,
+    summary: string,
+    art: Art[]
+    comments: Comment[],
 }
 
 interface Comment{

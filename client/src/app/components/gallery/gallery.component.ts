@@ -10,6 +10,8 @@ import { GalleryService } from 'src/app/services/gallery.service';
 })
 export class GalleryComponent implements OnInit {
 
+  artIds!: number[];
+
   public artPieces: Art[] = [];
 
   message: string = "";
@@ -25,15 +27,29 @@ export class GalleryComponent implements OnInit {
 
   onSubmit() {
 
+    this.artPieces = [];
+
     console.log(this.galleryForm.value.query);
 
-    this.galleryService.getArt(this.galleryForm.value.query).subscribe({
+    this.galleryService.getArtIds(this.galleryForm.value.query).subscribe({
       next: value => {
-        this.artPieces = value; // Returns an array of objectIDs that match parameter, not the details of the piece that matches the query
+        this.artIds = value.objectIDs; // Returns an array of objectIDs that match the query
       },
-      complete: () =>
-        console.log('Retrieved art pieces')
-      ,
+      complete: () => {
+        console.log('Retrieved objectIDs'),
+        console.log(this.artIds);
+
+        // retrieving information for each objectID (10)
+
+        for (let i = 0; i < 10; i++) {
+
+          this.galleryService.getArt(this.artIds[i]).subscribe({
+            next: value => this.artPieces.push(value)
+          })
+
+        } 
+
+      },
       error: (err) => this.message = err
     });
   }

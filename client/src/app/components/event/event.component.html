@@ -25,7 +25,7 @@
               <button type="button" class="btn btn-outline-dark btn-space" data-toggle="modal" data-target="#exampleModal">Book</button>
 
             </div>
-            <div class="col">
+            <div class="col" *ngIf="isAdmin">
               <div class="dropdown">
                 <button class="btn btn-outline-dark btn-space dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Options

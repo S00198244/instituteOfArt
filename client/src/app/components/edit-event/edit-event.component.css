@@ -1,13 +1,13 @@
-.centered{
+/* .centered{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-input{
+/* input{
     margin-left: 2em;
     margin-right: 2em;
-}
+} */
 
 .btn-space{
     margin: 1em;
